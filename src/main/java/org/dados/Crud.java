@@ -9,7 +9,7 @@ public class Crud {
         this.sc = sc;
     }
 
-    public void insert() {
+    public void create() {
         String[][] tabla = tabla();
         if (tabla == null) return;
         String table = tabla[0][0];
@@ -55,7 +55,7 @@ public class Crud {
         System.out.println("Filas insertadas: " + rows);
     }
 
-    public void select() {
+    public void read() {
         String[][] tabla = tabla();
         if (tabla == null) return;
         String table = tabla[0][0];

@@ -59,8 +59,8 @@ public class App {
             }
 
             switch (Integer.parseInt(opt)) {
-                case 1 -> crud.insert();
-                case 2 -> crud.select();
+                case 1 -> crud.create();
+                case 2 -> crud.read();
                 case 3 -> crud.update();
                 case 4 -> crud.delete();
                 case 0 -> { return; }
