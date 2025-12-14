@@ -194,7 +194,7 @@ public class Crud {
             case 1 -> new String[][]{{"usuarios", "id_usuario", "nombre", "email"}};
             case 2 -> new String[][]{{"libros", "id_libro", "titulo", "autor", "disponible"}};
             case 3 -> new String[][]{{"prestamos", "id_prestamo", "id_usuario", "id_libro"}};
-            case 4 -> { yield null; }
+            case 4 -> null;
             default -> tabla();
         };
     }

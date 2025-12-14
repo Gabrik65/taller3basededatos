@@ -37,18 +37,7 @@ public class Database {
         }
     }
 
-    public static void testConnection() {
-        try (Connection con = getConnection();
-             PreparedStatement ps = con.prepareStatement("SELECT 1");
-             ResultSet rs = ps.executeQuery()) {
 
-            if (rs.next()) {
-                System.out.println("DB OK (SELECT 1 = " + rs.getInt(1) + ")");
-            }
-        } catch (SQLException e) {
-            throw new RuntimeException("DB test failed: " + e.getMessage(), e);
-        }
-    }
 
     public static int executeUpdate(String sql, Object... params) {
         try (Connection con = getConnection();
@@ -62,22 +51,6 @@ public class Database {
         }
     }
 
-    // For INSERT ... RETURNING id_xxx
-    public static Integer executeUpdateReturnId(String sql, Object... params) {
-        try (Connection con = getConnection();
-             PreparedStatement ps = con.prepareStatement(sql)) {
-
-            bindParams(ps, params);
-
-            try (ResultSet rs = ps.executeQuery()) {
-                if (rs.next()) return rs.getInt(1);
-                return null;
-            }
-
-        } catch (SQLException e) {
-            throw new RuntimeException("DB insert RETURNING failed: " + e.getMessage() + " | SQL: " + sql, e);
-        }
-    }
 
     public static void executeQueryAndPrint(String sql, Object... params) {
         try (Connection con = getConnection();
