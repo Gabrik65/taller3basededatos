@@ -3,10 +3,10 @@ package org.dados;
 import java.util.Objects;
 import java.util.Scanner;
 
-public class Crudo {
+public class Crud {
     private final Scanner sc;
 
-    public Crudo(Scanner sc) {
+    public Crud(Scanner sc) {
         this.sc = sc;
     }
 

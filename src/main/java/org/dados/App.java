@@ -7,11 +7,11 @@ public class App {
 
     public static void main(String[] args) {
         Database.init();
-        Crudo crud = new Crudo(sc);
+        Crud crud = new Crud(sc);
         menu(crud);
     }
 
-    public static void menu(Crudo crud) {
+    public static void menu(Crud crud) {
         mostrarMenu();
         String option = sc.next();
 
@@ -32,7 +32,7 @@ public class App {
         System.out.println("Selecciona una opcion:");
     }
 
-    public static void ejecutarOpcion(int opcion, Crudo crud) {
+    public static void ejecutarOpcion(int opcion, Crud crud) {
         switch (opcion) {
             case 1 -> crud.insert();
             case 2 -> crud.select();
