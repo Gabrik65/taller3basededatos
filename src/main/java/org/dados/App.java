@@ -16,7 +16,7 @@ public class App {
         while (true) {
             System.out.println("Menu Principal");
             System.out.println("1- Crud");
-            System.out.println("2- Acid");
+            System.out.println("2- Interfaz Usuario");
             System.out.println("0- Salir");
             System.out.print("Seleccione una opcion: ");
 
@@ -71,7 +71,7 @@ public class App {
 
     public static void menuAcid(Acid acid) {
         while (true) {
-            System.out.println("Menu ACID");
+            System.out.println("Menu Interfaz Usuario");
             System.out.println("1- Prestar libro");
             System.out.println("2- Devolver libro");
             System.out.println("3- Libros prestados a usuario");
