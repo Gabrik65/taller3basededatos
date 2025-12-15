@@ -166,10 +166,26 @@ public class Crud {
         String pk = tabla[0][1];
         sc.nextLine();
 
+        if ("usuarios".equals(table)) {
+            System.out.println("ADVERTENCIA: Eliminar un usuario con préstamos activos puede fallar.");
+        }
+
         int id = readInt("Ingrese " + pk + " a eliminar: ");
         String sql = "DELETE FROM " + table + " WHERE " + pk + " = ?";
-        int rows = Database.executeUpdate(sql, id);
-        System.out.println("Filas eliminadas: " + rows);
+
+        try {
+            int rows = Database.executeUpdate(sql, id);
+            System.out.println("Filas eliminadas: " + rows);
+        } catch (RuntimeException e) {
+            String errorMessage = e.getMessage().toLowerCase();
+
+            if ("usuarios".equals(table) && errorMessage.contains("foreign key constraint")) {
+                System.out.println(" No se puede realizar el procedimiento: ");
+                System.out.println("El usuario tiene préstamos activos y no puede ser eliminado.");
+            } else {
+                System.out.println("Error de base de datos: " + e.getMessage());
+            }
+        }
     }
 
     private int readInt(String prompt) {

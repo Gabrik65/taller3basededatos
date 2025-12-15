@@ -93,50 +93,6 @@ public class Acid {
         }
     }
 
-    public void librosPrestadosAUsuario() {
-        try (Connection con = Database.getConnection()) {
-
-            Integer idUsuario = seleccionarUsuario(con);
-            if (idUsuario == null) return;
-
-            String sql =
-                    "SELECT p.id_prestamo, l.titulo, l.autor, p.fecha_prestamo, p.fecha_devolucion " +
-                            "FROM prestamos p " +
-                            "JOIN libros l ON l.id_libro = p.id_libro " +
-                            "WHERE p.id_usuario = ? " +
-                            "ORDER BY p.fecha_prestamo DESC";
-
-            try (PreparedStatement ps = con.prepareStatement(sql)) {
-                ps.setInt(1, idUsuario);
-
-                try (ResultSet rs = ps.executeQuery()) {
-                    boolean any = false;
-
-                    while (rs.next()) {
-                        any = true;
-                        String fechaDev = rs.getDate("fecha_devolucion") == null
-                                ? "No devuelto"
-                                : rs.getDate("fecha_devolucion").toString();
-
-                        System.out.println(
-                                "Préstamo #" + rs.getInt("id_prestamo") +
-                                        " | " + rs.getString("titulo") +
-                                        " | " + rs.getString("autor") +
-                                        " | Prestado: " + rs.getDate("fecha_prestamo") +
-                                        " | Devolución: " + fechaDev
-                        );
-                    }
-
-                    if (!any) {
-                        System.out.println("Este usuario no tiene préstamos");
-                    }
-                }
-            }
-
-        } catch (SQLException e) {
-            throw new RuntimeException("Error al listar préstamos: " + e.getMessage(), e);
-        }
-    }
 
     private Integer seleccionarUsuario(Connection con) throws SQLException {
         String sql = "SELECT id_usuario, nombre FROM usuarios ORDER BY id_usuario";
